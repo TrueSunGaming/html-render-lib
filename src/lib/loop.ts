@@ -1,4 +1,5 @@
 import { Component } from "./Component";
+import { Scene } from "./Scene";
 
 let lastUpdate: number = Date.now();
 
@@ -8,7 +9,7 @@ function draw() {
     let delta: number = (Date.now() - lastUpdate) / 1000;
 
     for (const i of loopListen) i(delta);
-    for (const i of Component.renderedComponents) i.update(delta);
+    for (const i of Scene.renderedScenes) i.update(delta);
 
     lastUpdate = Date.now();
 

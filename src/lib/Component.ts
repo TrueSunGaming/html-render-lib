@@ -52,6 +52,8 @@ export class Component<T extends HTMLElement> {
     }
 
     update(delta: number): void {
+        if (!this.rendered) return;
+
         this.realPosition.easeToAssign({
             type: this.movementEasing.type,
             rate: 1 - ((1 - this.movementEasing.rate) ** delta)
