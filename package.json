@@ -1,0 +1,20 @@
+{
+  "name": "html-render",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "@fontsource/roboto": "^5.0.8",
+    "@fontsource/titillium-web": "^5.0.18"
+  }
+}
