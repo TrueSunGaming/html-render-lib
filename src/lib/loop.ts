@@ -1,4 +1,3 @@
-import { Component } from "./Component";
 import { Scene } from "./Scene";
 
 let lastUpdate: number = Date.now();

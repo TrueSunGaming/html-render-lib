@@ -8,9 +8,11 @@ export class Scene {
     components: Component<HTMLElement>[] = [];
     rendered = false;
     readonly id: number;
+    readonly styleNamespace: string;
 
-    constructor() {
+    constructor(styleNamespace: string = "") {
         this.id = Scene.nextId++;
+        this.styleNamespace = styleNamespace;
     }
 
     static switchScene(id: number) {
@@ -30,7 +32,11 @@ export class Scene {
     }
     
     render(): void {
-        for (const i of this.components) i.render();
+        for (const i of this.components) {
+            i.render();
+            
+            if (!i.el.classList.contains(`scene-${this.styleNamespace}`)) i.el.classList.add(`scene-${this.styleNamespace}`);
+        }
 
         this.rendered = true;
         Scene.renderedScenes.push(this);

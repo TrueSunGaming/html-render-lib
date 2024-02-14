@@ -20,12 +20,14 @@ export class Component<T extends HTMLElement> {
     private realPosition: Vector2;
     private clickListeners: (() => void)[] = [];
     readonly id: number;
+    readonly styleId: string;
 
-    constructor(el: T, position: Vector2) {
+    constructor(el: T, position: Vector2, styleId = "") {
         this.el = el.cloneNode(false) as T;
         this.realPosition = position;
         this.movementGoal = position;
         this.id = Component.nextId++;
+        this.styleId = styleId;
         
         this.el.addEventListener("click", () => {
             for (const listener of this.clickListeners) {
@@ -79,6 +81,7 @@ export class Component<T extends HTMLElement> {
         if (this.rendered) return;
 
         this.el.style.position = "fixed";
+        this.el.id = this.styleId;
         this.update(0);
 
         document.body.appendChild(this.el);
@@ -101,7 +104,7 @@ export class Component<T extends HTMLElement> {
         this.clickable = true;
     }
 
-    static create<T extends keyof HTMLElementTagNameMap>(type: T): Component<HTMLElementTagNameMap[T]> {
-        return new Component(document.createElement(type), new Vector2());
+    static create<T extends keyof HTMLElementTagNameMap>(type: T, styleId = ""): Component<HTMLElementTagNameMap[T]> {
+        return new Component(document.createElement(type), new Vector2(), styleId);
     }
 }
